@@ -33,10 +33,10 @@ Summary of Improvements
 
 Summary of Improvements
 
-* 12% improvement in CPU usage for 1KB transactions
-* 9% improvement in CPU usage for 16MB transactions
-* 15% reduction in memory usage for 16MB transactions
+* 12% improvement in CPU usage for 1 KB transactions
+* 9% improvement in CPU usage for 16 MB transactions
+* 15% reduction in memory usage for 16 MB transactions
 
 Degradations
 
-* 13% increase in memory usage for 1KB transactions
+* 13% increase in memory usage for 1 KB transactions
