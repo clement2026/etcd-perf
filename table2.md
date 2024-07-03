@@ -1,4 +1,4 @@
-### Test 2
+### Test 1
 
 `rw-heatmap`
 
@@ -20,7 +20,7 @@ Summary of Improvements
 
 * 59% reduction in maximum memory usage
 
-### Test 2
+### Test 3
 
 `benchmark txn-mixed` 1,000,000 transactions, within 20 minutes
 
