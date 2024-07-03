@@ -1,13 +1,17 @@
+@serathius Here’s a summary of the three tests I’ve done. Please review it when you have a moment.
+
 ### Test 1
 
-`rw-heatmap`
+`rw-heatmap` R/W ratio 4:1
 
-Summary of Improvements
+![compare](https://github.com/etcd-io/etcd/assets/27894831/dd5a5919-01ea-429d-a526-a90d0dd596a6)
+
+Improvements
 
 * 2% ~ 12% improvement to read performance
 * 1% ~ 13% improvement to write performance
 
-### Test 2
+### Test 2 
 
 `benchmark put` 50000 values of 1 MB each, within 6 minutes
 
@@ -16,11 +20,11 @@ Summary of Improvements
 | main   | 31 GB      |
 | patch  | 12 GB      |
 
-Summary of Improvements
+Improvements
 
 * 59% reduction in maximum memory usage
 
-### Test 3
+### Test 3 
 
 `benchmark txn-mixed` 1,000,000 transactions, within 20 minutes
 
@@ -31,12 +35,12 @@ Summary of Improvements
 | 16 MB      | main   | 188.97 MB      | 884.82 MB    | 6552.40s  |
 |            | patch  | 119.57 MB      | 753.51 MB    | 5954.52s  |
 
-Summary of Improvements
+Improvements
 
 * 12% improvement in CPU usage for 1 KB transactions
 * 9% improvement in CPU usage for 16 MB transactions
 * 15% reduction in memory usage for 16 MB transactions
 
-Degradations
+**Degradations**
 
-* 13% increase in memory usage for 1 KB transactions
+* 13% increase in memory usage for 1 KB transactions - unexpected ☹️
