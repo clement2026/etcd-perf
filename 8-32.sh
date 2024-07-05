@@ -1,6 +1,6 @@
 #!/bin/bash
-ETCD_BIN="./bin/etcd"
-ETCD_BM_BIN="./bin/tools/benchmark"
+ETCD_BIN="/Users/clement/projects/clement/etcd/bin/etcd"
+ETCD_BM_BIN="/Users/clement/projects/clement/etcd/bin/tools/benchmark"
 BACKEND_SIZE="$((20 * 1024 * 1024 * 1024))" # 20GB
 KEY_SPACE_SIZE="$((1024 * 64))"
 RATIO="4.0"
@@ -23,6 +23,9 @@ case $1 in
     ;;
   "init")
     init_etcd_db
+    ;;
+  "write-small")
+    write_small
     ;;
   "write")
     write
@@ -68,6 +71,20 @@ function benchmark() {
 function write() {
   VALUE_SIZE="$((2 ** 20))" # 1MB
 #  KEY_SPACE_SIZE="$((1024 * 18))" # VALUE_SIZE * KEY_SPACE_SIZE = 18GB
+  echo "VALUE_SIZE=${VALUE_SIZE}"
+  echo "KEY_SPACE_SIZE=${KEY_SPACE_SIZE}"
+  echo "RUN_COUNT=${RUN_COUNT}"
+
+  ${ETCD_BM_BIN} put "" \
+    --key-space-size=${KEY_SPACE_SIZE} \
+    --total=${RUN_COUNT} \
+    --val-size ${VALUE_SIZE}
+}
+
+function write_small() {
+  VALUE_SIZE="$((2 ** 10))" # 1MB
+  RUN_COUNT="1000000"
+  #  KEY_SPACE_SIZE="$((1024 * 18))" # VALUE_SIZE * KEY_SPACE_SIZE = 18GB
   echo "VALUE_SIZE=${VALUE_SIZE}"
   echo "KEY_SPACE_SIZE=${KEY_SPACE_SIZE}"
   echo "RUN_COUNT=${RUN_COUNT}"
