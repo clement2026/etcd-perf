@@ -1,4 +1,4 @@
-apt install bc htop -y
+apt install bc htop make emacs -y
 
 curl -fsSLo- https://s.id/golang-linux | bash
 
