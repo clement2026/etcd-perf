@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# usage :
+# ./run.sh ~/etcd clean
+# ./run.sh ~/etcd start
+# ./run.sh ~/etcd init
+# ./run.sh ~/etcd bench
+# go tool pprof -proto -output main.pb.gz http://localhost:2379/debug/pprof/profile\?seconds\=130
+
 BASE_DIR=$1
 ETCD_BIN="$BASE_DIR/bin/etcd"
 ETCD_BM_BIN="$BASE_DIR/bin/tools/benchmark"
