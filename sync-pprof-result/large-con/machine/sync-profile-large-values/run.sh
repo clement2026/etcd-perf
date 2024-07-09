@@ -12,7 +12,7 @@ KEY_SIZE="256"
 # variable
 RATIO="4.0"
 VALUE_SIZE="$((2 ** 16))"
-CONN_CLI_COUNT="$((2**10))"
+CONN_CLI_COUNT="$((2**5))"
 RUN_COUNT=50000
 
 echo "RATIO=$RATIO"

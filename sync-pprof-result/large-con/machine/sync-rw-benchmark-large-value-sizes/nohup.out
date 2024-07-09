@@ -1,0 +1,194 @@
+RATIO_LIST=4/1
+REPEAT_COUNT=3
+RUN_COUNT=50000
+VALUE_SIZE_POWER_RANGE=13 15
+Sun Jul  7 06:53:03 AM UTC 2024
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,8192]...took 129 seconds
+kill etcd server instance
+9.500% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,8192]...took 121 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,8192]...took 116 seconds
+kill etcd server instance
+19.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,8192]...took 116 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,8192]...took 114 seconds
+kill etcd server instance
+28.500% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,8192]...took 114 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,8192]...took 115 seconds
+kill etcd server instance
+38.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,16384]...took 182 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,16384]...took 170 seconds
+kill etcd server instance
+47.600% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,16384]...took 162 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,16384]...took 154 seconds
+kill etcd server instance
+57.100% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,16384]...took 155 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,16384]...took 153 seconds
+kill etcd server instance
+66.600% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,16384]...took 154 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,32768]...took 262 seconds
+kill etcd server instance
+76.100% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,32768]...took 236 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,32768]...took 228 seconds
+kill etcd server instance
+85.700% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,32768]...took 220 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,32768]...took 218 seconds
+kill etcd server instance
+95.200% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,32768]...took 211 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,32768]...took 223 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,8192]...took 146 seconds
+kill etcd server instance
+9.500% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,8192]...took 136 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,8192]...took 140 seconds
+kill etcd server instance
+19.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,8192]...took 131 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,8192]...took 134 seconds
+kill etcd server instance
+28.500% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,8192]...took 138 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,8192]...took 135 seconds
+kill etcd server instance
+38.000% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,16384]...took 193 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,16384]...took 179 seconds
+kill etcd server instance
+47.600% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,16384]...took 172 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,16384]...took 165 seconds
+kill etcd server instance
+57.100% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,16384]...took 168 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,16384]...took 165 seconds
+kill etcd server instance
+66.600% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,16384]...took 163 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,32,32768]...took 275 seconds
+kill etcd server instance
+76.100% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,64,32768]...took 252 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,128,32768]...took 243 seconds
+kill etcd server instance
+85.700% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,256,32768]...took 231 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,512,32768]...took 232 seconds
+kill etcd server instance
+95.200% completed
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,1024,32768]...took 219 seconds
+kill etcd server instance
+start etcd server in the background
+initialize etcd database...
+run with setting [DATA,4.0000,2048,32768]...took 223 seconds
+kill etcd server instance
+Sun Jul  7 09:43:45 AM UTC 2024
