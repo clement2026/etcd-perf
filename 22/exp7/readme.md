@@ -1,0 +1,1 @@
+only run sync once and then compare to first csv in exp5 
