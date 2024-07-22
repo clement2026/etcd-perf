@@ -1,0 +1,1 @@
+only compare main and remove-lock, but main first this time
