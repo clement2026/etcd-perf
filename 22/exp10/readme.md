@@ -1,0 +1,1 @@
+only run rwlock again and then compare to first csv in exp5 
