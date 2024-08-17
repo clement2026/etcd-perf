@@ -1,12 +1,12 @@
-## Benchmark details
+# Benchmark Details
 
-Here's how I did the benchmark:
-1. Run benchmark on `main`, `step_1`, `step_10`, `step_100`, `step_1000` and `main` branch in sequence. 
-2. Reboot the system between each run.
-3. Collect .csv files and generate heatmaps.
+Here's how I ran the benchmark:
+1. Run benchmark on `main`, `step_1`, `step_10`, `step_100`, `step_1000` and `main` branch in that order. 
+2. Reboot the OS between each run.
+3. Collect .csv files and generate the heat maps.
 
 ### step_1 vs main
-Compact raft log every time `applied index` increases 1.
+Compact raft log every time `applied index` increases by 1.
 
 ![step_1_read](https://github.com/user-attachments/assets/f2b1d897-3e31-4e39-be31-596c671ede29)
 
@@ -31,7 +31,7 @@ Re-run benchmarks on the main branch to ensure results are consistent
 ![main_2_read](https://github.com/user-attachments/assets/faf1d3fb-b340-41ff-85d8-50cd4818d7bf)
 
 ### step_1 vs step_10
-Since the benchmark results for step_1 and step_10 are pretty close, here we compare them to see the difference:
+Since the benchmark results for step_1 and step_10 are pretty close, here I compare them to see the difference:
 
 ![step_1-vs-step_10_read](https://github.com/user-attachments/assets/afe3fefe-e4b2-4514-b3d3-63bf14e33ea5)
 
@@ -42,7 +42,7 @@ GitHub workflow: https://github.com/clement2026/etcd-benchmark-action/actions/ru
 
 The archive containing .csv files and the script: [etcd-benchmark-20240817-06-00-29.zip](https://github.com/user-attachments/files/16644019/etcd-benchmark-20240817-06-00-29.zip)
 
-The benchmark was run on a self-hosted cloud VM with:
+The benchmark was run on a cloud VM with:
 * 16GB RAM
 * 8 vCPUs
 * 150GB NVMe SSD
