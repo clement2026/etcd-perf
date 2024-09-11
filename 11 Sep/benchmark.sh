@@ -1,0 +1,1 @@
+./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000000
