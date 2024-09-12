@@ -294,7 +294,7 @@ live-pprof 2379
 
 ---
 
-### How to estimate the heap size of etcd
+## How to estimate the heap size of etcd
 
 The etcd member catch-up mechanism maintains a list of entries to keep the leader and followers in sync.
 When etcd receives a put request, it appends the request data to the entries. These entries significantly impact etcd’s heap size.
