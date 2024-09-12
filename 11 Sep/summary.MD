@@ -347,8 +347,11 @@ You can also set custom values for `--snapshot-count` and `--experimental-snapsh
 ### Q2: Is it okay to set a really low value for `--snapshot-count`
 
 Setting a low value for `--snapshot-count` makes etcd create snapshots more often. This can cause CPU spikes and isn't ideal for latency-sensitive situations.
+Here’s an example of the spikes:
 
-### Q3: What about a really low value for `--experimental-snapshot-catchup-entries`?
+<img width="600" alt="1000K-10K-5000" src="https://github.com/user-attachments/assets/e1f121ed-5a2e-4317-b615-867756cfe27c">
+
+### Q3: Is it okay to set a really low value for `--experimental-snapshot-catchup-entries`?
 
 If `--experimental-snapshot-catchup-entries` is set too low, slow followers might have to rely on snapshots to catch up with the leader.
 This is less efficient than catching up using the entries. This usually happens when the network connection between the leader and followers is poor.
@@ -357,7 +360,7 @@ However, It’s fine to set `--experimental-snapshot-catchup-entries` to as low 
 
 ---
 
-This comment focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap`(used by bbolt) and `cgo`. To find out how much physical
-memory etcd requires, memory allocated through `mmap` must be taken into account. 
+The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap`(used by bbolt) and `cgo`. To find out how much physical
+memory etcd requires, memory allocated through `mmap` must be taken into account.  
 
 
