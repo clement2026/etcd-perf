@@ -1,5 +1,6 @@
 #18382 raises the issue of high memory usage related to the etcd member catch-up mechanism. I’ve been working on it for a while and have some findings to share.
 
+## Experiments
 I’ve run a few experiments to observe the heap size of an etcd instance. Below is a table I put together from my observations, showing how the heap size changes when benchmarking etcd.
 
 * `putSize`: average size of `put` requests
@@ -19,7 +20,7 @@ I’ve run a few experiments to observe the heap size of an etcd instance. Below
 
 > Both v3.5 and v3.6 use 5000 as the default value for `--experimental-snapshot-catchup-entries`; however, the default value for `--snapshot-count` is set much lower in v3.6 at 10,000, compared to 100,000 in v3.5.
 
-### v3.5.16 f20bbadd4
+#### v3.5.16 f20bbadd4
 
 <details>
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
@@ -201,7 +202,7 @@ live-pprof 2379
 <img width="1915" alt="1000K-500-500" src="https://github.com/user-attachments/assets/922d6e25-105d-42f3-b2c7-e755fb297f45">
 </details>
 
-### v3.6.0-alpha.0 981061a49
+#### v3.6.0-alpha.0 981061a49
 
 <details>
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
@@ -291,11 +292,14 @@ live-pprof 2379
 <img width="1280" alt="100K-100K-5000" src="https://github.com/user-attachments/assets/9be815b8-c533-4fc2-a75f-a3a0d67ef10e">
 </details>
 
+---
+
+### How to estimate the heap size of etcd
+
 The etcd member catch-up mechanism maintains a list of entries to keep the leader and followers in sync.
 When etcd receives a put request, it appends the request data to the entries. These entries significantly impact etcd’s heap size.
 
-As `put` requests keep appending to the entries, `--snapshot-count` and `--experimental-snapshot-catchup-entries` control when and how to shrink/compact the
-entries.
+As `put` requests keep appending to the entries, `--snapshot-count` and `--experimental-snapshot-catchup-entries` control when and how to shrink/compact the entries.
 
 Once we know the average size of `put` requests (let’s call it `putSize`), we can estimate the heap size of these entries. It ranges from:
 
@@ -315,11 +319,9 @@ With this in mind, we can try to answer some questions.
 
 ### Q1: Do I need to worry about the heap size of etcd?
 
-If `putSize` is small, like 1KB, the heap size should be under 200 MB for v3.5 and under 50 MB for v3.6. With such low memory usage, there is no need to
-manually set `--snapshot-count` and `--experimental-snapshot-catchup-entries`. The default settings work fine.
+If `putSize` is small, like 1KB, the heap size should be under 200 MB for v3.5 and under 50 MB for v3.6. With such low memory usage, there is no need to manually set `--snapshot-count` and `--experimental-snapshot-catchup-entries`. The default settings work fine.
 
-If `putSize` is big, you can estimate the heap size of etcd according to the table and calculations we discussed earlier. You can also set
-custom values for `--snapshot-count` and `--experimental-snapshot-catchup-entries` to control the heap size.
+If `putSize` is big, you can estimate the heap size of etcd according to the table and calculations we discussed earlier. You can also set custom values for `--snapshot-count` and `--experimental-snapshot-catchup-entries` to control the heap size.
 
 ### Q2: Is it okay to set a really low value for `--snapshot-count`?
 
