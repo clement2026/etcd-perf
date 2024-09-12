@@ -1,7 +1,6 @@
-#18382 raises the issue of high memory usage related to the etcd member catch-up mechanism.
+#18382 raises the issue of high memory usage related to the etcd member catch-up mechanism. I’ve been working on it for a while and have some findings to share.
 
-I’ve conducted a few experiments to observe the heap size of an etcd instance. Below is a table I put together from my observations, showing how the heap size
-changes when benchmarking etcd.
+I’ve run a few experiments to observe the heap size of an etcd instance. Below is a table I put together from my observations, showing how the heap size changes when benchmarking etcd.
 
 * `putSize`: average size of `put` requests
 
@@ -18,7 +17,7 @@ changes when benchmarking etcd.
 | ---     | ---              | ---                                          | ---                   | ---                          |
 | 1 MB    | 500              | 500                                          | 550 MB ~ 1 GB         |                              |
 
-> Both v3.5 and v3.6 use 5000 as the default value for `--experimental-snapshot-catchup-entries`; however, `--snapshot-count` is set much lower in v3.6 at 10,000, compared to 100,000 in v3.5.
+> Both v3.5 and v3.6 use 5000 as the default value for `--experimental-snapshot-catchup-entries`; however, the default value for `--snapshot-count` is set much lower in v3.6 at 10,000, compared to 100,000 in v3.5.
 
 ### v3.5.16 f20bbadd4
 
@@ -331,8 +330,7 @@ Here’s an example of the spikes:
 
 ### Q3: Is it okay to set a really low value for `--experimental-snapshot-catchup-entries`?
 
-If `--experimental-snapshot-catchup-entries` is set too low, slow followers might have to rely on snapshots to catch up with the leader, which is less efficient
-than catching up using the entries. This usually happens when the network connection between the leader and followers is poor.
+If `--experimental-snapshot-catchup-entries` is set too low, slow followers might need to use snapshots to catch up with the leader. This is less efficient and puts more pressure on the leader compared to just using the entries. This often occurs when the network connection between the leader and followers is bad.
 
 However, it’s fine to set `--experimental-snapshot-catchup-entries` to as low as `1` if you only have a single instance of etcd.
 
