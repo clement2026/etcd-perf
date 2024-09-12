@@ -3,6 +3,8 @@
 I’ve done a few experiments to observe the heap size of an etcd instance and here’s the table I put together from my observations, showing how the heap size
 changes when benchmarking etcd.
 
+* `putSize`: average size of `put` requests
+
 | putSize | --snapshot-count | --experimental-snapshot<br/>-catchup-entries | heap size<br/>v3.5.16 | heap size<br/>v3.6.0-alpha.0 |
 |---------|------------------|----------------------------------------------|-----------------------|------------------------------|
 | 1 KB    | 10000            | 5000                                         | 6 MB ~ 28 MB          | 13 MB ~ 33 MB                |
