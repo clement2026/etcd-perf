@@ -317,6 +317,8 @@ The heap size of these entries, plus some overhead, is roughly the heap size and
 
 With this in mind, we can try to answer some questions.
 
+---
+
 ### Q1: Do I need to worry about the heap size of etcd?
 
 If `putSize` is small, like 1KB, the heap size should be under 200 MB for v3.5 and under 50 MB for v3.6. With such low memory usage, there is no need to manually set `--snapshot-count` and `--experimental-snapshot-catchup-entries`. The default settings work fine.
