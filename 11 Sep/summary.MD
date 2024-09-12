@@ -7,14 +7,14 @@ changes when benchmarking etcd.
 
 | putSize | --snapshot-count | --experimental-snapshot<br/>-catchup-entries | heap size<br/>v3.5.16 | heap size<br/>v3.6.0-alpha.0 |
 |---------|------------------|----------------------------------------------|-----------------------|------------------------------|
-| 1 KB    | 10000            | 5000                                         | 6 MB ~ 28 MB          | 13 MB ~ 33 MB                |
+| 1 KB    | 10000            | 5000                                         | 6 MB ~ 28 MB          | 13 MB ~ 31.7 MB              |
 | 10 KB   | 10000            | 5000                                         | 64 MB ~ 180 MB        |                              |
 | 100 KB  | 10000            | 5000                                         | 569 MB ~ 1.5 GB       | 536 MB ~ 1.62 GB             |
 | 1 MB    | 10000            | 5000                                         | 5 GB ~ 14.2 GB        |                              |
 | ---     | ---              | ---                                          | ---                   | ---                          |
 | 1 KB    | 100000           | 5000                                         | 15 MB ~ 143 MB        | 15 MB ~ 152 MB               |
 | 10 KB   | 100000           | 5000                                         | 67 MB ~ 1.1GB         |                              |
-| 100 KB  | 100000           | 5000                                         | 900 MB ~ 11 GB        | 690 MB ~ 10.4 GB             |
+| 100 KB  | 100000           | 5000                                         | 900 MB ~ 10.6 GB      | 690 MB ~ 10.4 GB             |
 | ---     | ---              | ---                                          | ---                   | ---                          |
 | 1 MB    | 500              | 500                                          | 550 MB ~ 1 GB         |                              |
 
@@ -329,7 +329,9 @@ Once we know the average size of `put` requests(let’s call it `putSize`), we c
 ```bash
 experimental-snapshot-catchup-entries * putSize
 ```
+
 to
+
 ```bash
 (experimental-snapshot-catchup-entries + snapshot-count) * putSize
 ```
@@ -362,7 +364,8 @@ However, It’s fine to set `--experimental-snapshot-catchup-entries` to as low 
 
 ---
 
-The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap`(used by bbolt) and `cgo`. To find out how much physical
+The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap`(used by bbolt) and `cgo`. To find out how much
+physical
 memory etcd requires, memory allocated through `mmap` must be taken into account.  
 
 
