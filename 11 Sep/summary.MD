@@ -338,5 +338,4 @@ However, it’s fine to set `--experimental-snapshot-catchup-entries` to as low 
 
 ---
 
-The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap` (used by bbolt) and `cgo`. To determine the total
-physical memory requirements for etcd, memory allocated through `mmap` must also be taken into account.
+The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap` (used by bbolt) and `cgo`. To determine the total physical memory requirements for etcd, memory allocated through `mmap` must also be taken into account.
