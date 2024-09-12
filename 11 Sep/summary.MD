@@ -1,6 +1,7 @@
-#18382 brings up the issue of high memory usage, which is related to the etcd member catch-up mechanism.
+#18382 raises the issue of high memory usage related to the etcd member catch-up mechanism.
 
-I’ve conducted a few experiments to observe the heap size of an etcd instance. Below is a table I put together from my observations, showing how the heap size changes when benchmarking etcd.
+I’ve conducted a few experiments to observe the heap size of an etcd instance. Below is a table I put together from my observations, showing how the heap size
+changes when benchmarking etcd.
 
 * `putSize`: average size of `put` requests
 
@@ -17,8 +18,7 @@ I’ve conducted a few experiments to observe the heap size of an etcd instance.
 | ---     | ---              | ---                                          | ---                   | ---                          |
 | 1 MB    | 500              | 500                                          | 550 MB ~ 1 GB         |                              |
 
-> Both v3.5 and v3.6 use 5000 as the default value for `--experimental-snapshot-catchup-entries`,
-> However, `--snapshot-count` is set much lower in v3.6 at 10,000, compared to 100,000 in v3.5.
+> Both v3.5 and v3.6 use 5000 as the default value for `--experimental-snapshot-catchup-entries`; however, `--snapshot-count` is set much lower in v3.6 at 10,000, compared to 100,000 in v3.5.
 
 ### v3.5.16 f20bbadd4
 
@@ -26,17 +26,17 @@ I’ve conducted a few experiments to observe the heap size of an etcd instance.
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof (https://github.com/moderato-app/live-pprof)
 live-pprof 2379 
 ```
 
@@ -47,19 +47,19 @@ live-pprof 2379
 <summary><kbd>putSize 10 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=10000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -70,19 +70,19 @@ live-pprof 2379
 <summary><kbd>putSize 100 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=100000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -93,19 +93,19 @@ live-pprof 2379
 <summary><kbd>putSize 1 MB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -116,17 +116,17 @@ live-pprof 2379
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 100,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --snapshot-count=100000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -137,19 +137,19 @@ live-pprof 2379
 <summary><kbd>putSize 10 KB</kbd> <kbd>snapshot-count 100,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=100000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=10000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -160,19 +160,19 @@ live-pprof 2379
 <summary><kbd>putSize 100 KB</kbd> <kbd>snapshot-count 100,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=100000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=100000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -183,19 +183,19 @@ live-pprof 2379
 <summary><kbd>putSize 1 MB</kbd> <kbd>snapshot-count 500</kbd> <kbd>experimental-snapshot-catchup-entries 500</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=500 \
---experimental-snapshot-catchup-entries 500
+--experimental-snapshot-catchup-entries=500
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -208,17 +208,17 @@ live-pprof 2379
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -229,19 +229,19 @@ live-pprof 2379
 <summary><kbd>putSize 100 KB</kbd> <kbd>snapshot-count 10,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=100000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -252,17 +252,17 @@ live-pprof 2379
 <summary><kbd>putSize 1 KB</kbd> <kbd>snapshot-count 100,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --snapshot-count=100000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
@@ -273,29 +273,30 @@ live-pprof 2379
 <summary><kbd>putSize 100 KB</kbd> <kbd>snapshot-count 100,000</kbd> <kbd>experimental-snapshot-catchup-entries 5000</kbd></summary>
 
 ```bash
-# run etcd
+# Run etcd
 rm -rf tmp.etcd;
 etcd --data-dir tmp.etcd \
 --enable-pprof=true \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=100000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
 
-# benchmark
+# Benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=100000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# Monitor heap size using live-pprof
 live-pprof 2379 
 ```
 
 <img width="1280" alt="100K-100K-5000" src="https://github.com/user-attachments/assets/9be815b8-c533-4fc2-a75f-a3a0d67ef10e">
 </details>
 
-The etcd member catch-up mechanism maintains a list of entries to keep the leader and followers in sync. 
-When etcd gets a put request, it appends the request data to the entries. These entries significantly impact etcd’s heap size.
+The etcd member catch-up mechanism maintains a list of entries to keep the leader and followers in sync.
+When etcd receives a put request, it appends the request data to the entries. These entries significantly impact etcd’s heap size.
 
-As `put` requests keep appending the entries, `--snapshot-count` and `--experimental-snapshot-catchup-entries` control when and how to shrink/compact the entries.
+As `put` requests keep appending to the entries, `--snapshot-count` and `--experimental-snapshot-catchup-entries` control when and how to shrink/compact the
+entries.
 
 Once we know the average size of `put` requests (let’s call it `putSize`), we can estimate the heap size of these entries. It ranges from:
 
@@ -309,28 +310,33 @@ to:
 (experimental-snapshot-catchup-entries + snapshot-count) * putSize
 ```
 
-The heap size of entries, plus some overhead, is roughly the heap size and RSS of etcd.
+The heap size of these entries, plus some overhead, is roughly the heap size and RSS of etcd.
 
 With this in mind, we can try to answer some questions.
 
 ### Q1: Do I need to worry about the heap size of etcd?
 
-If `putSize` is small, like 1KB, the heap size should be under 200 MB for v3.5 and under 50 MB for v3.6. With such low memory usage, there is no need to manually set `--snapshot-count` and `--experimental-snapshot-catchup-entries`. The default settings work fine.
+If `putSize` is small, like 1KB, the heap size should be under 200 MB for v3.5 and under 50 MB for v3.6. With such low memory usage, there is no need to
+manually set `--snapshot-count` and `--experimental-snapshot-catchup-entries`. The default settings work fine.
 
-If `putSize` is much bigger, you can estimate the heap size of etcd according to the table and calculate we discussed earlier. You can also set custom values for `--snapshot-count` and `--experimental-snapshot-catchup-entries` to control the heap size.
+If `putSize` is big, you can estimate the heap size of etcd according to the table and calculations we discussed earlier. You can also set
+custom values for `--snapshot-count` and `--experimental-snapshot-catchup-entries` to control the heap size.
 
 ### Q2: Is it okay to set a really low value for `--snapshot-count`?
 
-Setting a low value for `--snapshot-count` makes etcd create snapshots more often. This can cause CPU spikes and isn't ideal for latency-sensitive situations. Here’s an example of the spikes:
+Setting a low value for `--snapshot-count` makes etcd create snapshots more often. This can cause CPU spikes and isn't ideal for latency-sensitive situations.
+Here’s an example of the spikes:
 
 <img width="600" alt="1000K-10K-5000" src="https://github.com/user-attachments/assets/e1f121ed-5a2e-4317-b615-867756cfe27c">
 
 ### Q3: Is it okay to set a really low value for `--experimental-snapshot-catchup-entries`?
 
-If `--experimental-snapshot-catchup-entries` is set too low, slow followers might have to rely on snapshots to catch up with the leader. This is less efficient than catching up using the entries. This usually happens when the network connection between the leader and followers is poor.
+If `--experimental-snapshot-catchup-entries` is set too low, slow followers might have to rely on snapshots to catch up with the leader, which is less efficient
+than catching up using the entries. This usually happens when the network connection between the leader and followers is poor.
 
 However, it’s fine to set `--experimental-snapshot-catchup-entries` to as low as `1` if you only have a single instance of etcd.
 
 ---
 
-The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap` (used by bbolt) and `cgo`. To find out how much physical memory etcd requires, memory allocated through `mmap` must be taken into account. 
+The analysis above focuses solely on the heap size of etcd. It doesn’t include memory allocated through `mmap` (used by bbolt) and `cgo`. To determine the total
+physical memory requirements for etcd, memory allocated through `mmap` must also be taken into account.

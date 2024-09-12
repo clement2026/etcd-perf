@@ -14,7 +14,7 @@ etcd --data-dir tmp.etcd \
 # benchmark
 ./bin/tools/benchmark txn-mixed --total=99999999999 --val-size=1000000
 
-# monitor heap size using live-pprof(https://github.com/moderato-app/live-pprof)
+# monitor heap size using live-pprof
 live-pprof 2379 
 ```
 

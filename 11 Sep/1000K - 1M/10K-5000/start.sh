@@ -4,4 +4,4 @@ etcd --data-dir tmp.etcd \
 --auto-compaction-mode=periodic \
 --auto-compaction-retention=5s \
 --snapshot-count=10000 \
---experimental-snapshot-catchup-entries 5000
+--experimental-snapshot-catchup-entries=5000
